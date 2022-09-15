@@ -3,7 +3,7 @@
     <form class="container col-5 bg-dark py-4 px-4 col-10 col-md-6 col-lg-6" action="/users/register" method="POST">
       <div class="mb-3">
         <label for="name" class="form-label">Name</label>
-        <input name="name" type="text" class="form-control" id="name" autocomplete="name">
+        <input name="name" type="text" class="form-control" id="name" autocomplete="name" autofocus>
       </div>
       <div class="mb-3">
         <label for="lastName" class="form-label">Lastname</label>
@@ -30,8 +30,9 @@
         </div>
       </div>
       {{/if}}
-      <div class="d-flex">
+      <div class="d-flex justify-content-between">
         <input type="submit" class="btn btn-success " value="Register my account" />
+        <a href="/users/login" class="btn btn-warning">Back to login</a>
       </div>
   </div>
   </form>

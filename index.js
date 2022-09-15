@@ -3,7 +3,7 @@ const path = require('path');
 const { log } = require("console")
 const express = require("express");
 const session = require("express-session")
-
+const auth = require("./helpers/auth")
 const hbs = require("express-handlebars");
 
 const app = express()
@@ -23,20 +23,16 @@ app.use(express.static(path.join(__dirname, "/public")));
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 
-
-
 app.get("/", (req, res) => {
-  res.render("home");
+  res.render("home", { user: req.session.user });
 });
 
-const auth = (req, res, next) => {
-  if (req.session.user) {
-    next()
-  } else res.render("noAuth")
-}
-
 app.get("/secret", auth, (req, res) => {
-  res.render("secret", { user: req.session.user })
+  res.render("secret", { user: `${req.session.user.name} ${req.session.user.lastName}`, id: req.session.user.id })
+})
+
+app.get("/noauth", (req, res) => {
+  res.render("noAuth")
 })
 
 app.use("/users", require("./routes/usersRt"))
