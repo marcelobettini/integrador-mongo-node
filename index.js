@@ -1,5 +1,6 @@
 require("./config/mongo")
 const helmet = require('helmet')
+const cookieParser = require('cookie-parser')
 const path = require('path');
 const { log } = require("console")
 const express = require("express");
@@ -9,11 +10,15 @@ const hbs = require("express-handlebars");
 
 const app = express()
 app.use(helmet())
+app.use(cookieParser())
+app.use(express.cookieParser())
+app.use
 
 app.use(session({
   secret: process.env.SESSION_SECRET,
   resave: false,
   saveUninitialized: true,
+  cookie: { secure: true }
 }));
 
 
