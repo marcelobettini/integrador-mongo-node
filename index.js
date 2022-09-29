@@ -7,6 +7,7 @@ const auth = require("./helpers/auth")
 const hbs = require("express-handlebars");
 
 const app = express()
+app.use(helmet())
 
 app.use(session({
   secret: process.env.SESSION_SECRET,
